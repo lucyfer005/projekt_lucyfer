@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Strona szatana</title>
+    <meta charset='utf-8'>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Strona szatana">
+    <meta name="author" content="Lucyfer">
+
+    <link rel="stylesheet" href="/pure-min.css">
+    <link rel="stylesheet" href="/side-menu.css">
+    <script>
+
+        // Simple JavaScript Templating
+        // John Resig - https://johnresig.com/ - MIT Licensed
+        (function () {
+            var cache = {};
+
+            this.tmpl = function tmpl(str, data) {
+                // Figure out if we're getting a template, or if we need to
+                // load the template - and be sure to cache the result.
+                var fn = !/\W/.test(str) ?
+                    cache[str] = cache[str] ||
+                        tmpl(document.getElementById(str).innerHTML) :
+
+                    // Generate a reusable function that will serve as a template
+                    // generator (and which will be cached).
+                    new Function("obj",
+                        "var p=[],print=function(){p.push.apply(p,arguments);};" +
+
+                        // Introduce the data as local variables using with(){}
+                        "with(obj){p.push('" +
+
+                        // Convert the template into pure JavaScript
+                        str
+                            .replace(/[\r\t\n]/g, " ")
+                            .split("<%").join("\t")
+                            .replace(/((^|%>)[^\t]*)'/g, "$1\r")
+                            .replace(/\t=(.*?)%>/g, "',$1,'")
+                            .split("\t").join("');")
+                            .split("%>").join("p.push('")
+                            .split("\r").join("\\'")
+                        + "');}return p.join('');");
+
+                // Provide some basic currying to the user
+                return data ? fn(data) : fn;
+            };
+        })();
+
+        var routes = {};
+
+        //
+        function route(path, templateId, controller) {
+            routes[path] = {templateId: templateId, controller: controller};
+        }
+
+        var el = null;
+
+        function router() {
+            // Lazy load view element:
+            el = el || document.getElementById('view');
+            // Current route url (getting rid of '#' in hash as well):
+            var url = location.hash.slice(1) || '/';
+            // Get route by url:
+            var route = routes[url];
+            // Do we have both a view and a route?
+            if (el && route.controller) {
+                // Render route template with John Resig's template engine:
+                el.innerHTML = tmpl(route.templateId, new route.controller());
+            }
+        }
+
+        // Listen on hash change:
+        window.addEventListener('hashchange', router);
+        // Listen on page load:
+        window.addEventListener('load', router);
+    </script>
+    <script type="text/html" id="home">
+        <p>Jest wiele osób, które chcą wprowadzić Cię w błąd, mówiąc że "Bóg" istnieje. Ci ludzie są kłamcami! Bogiem
+            jesteś Ty sam i to Siebie powinieneś czcić! Nie daj się zwieść innym, którzy chcą głównie na tym zarobić.
+            Religia istnieje przez Kościół i duchownych, którzy dzięki szerzeniu tych bzdur mogą się utrzymać.</p>
+        <p>Szatan reprezentuje prawdziwą naturę człowieka - jako cielesnego zwierzęcia żyjącego we wszechświecie, który
+            jest przesiąknięty "Ciemną Siłą". W miarę upływu czasu człowiek nazwał tę "Siłę" wieloma różnymi nazwami,
+            przez co została ona oddzielona od ludzkiego życia, oraz znienawidzona. Teraz Ci ludzie żyją z Nami w
+            obsesyjnej nienawiści. Osoby współbrzmiące z Szatanem zawsze były "obcą elitą", outsiderami w kulturach,
+            które czczą zewnętrzne bóstwo. My Szataniści jesteśmy naszymi własnymi Bogami i badaczami. Nie kłaniamy się
+            przed mitami i fikcjami duchowych stronników.</p>
+    </script>
+    <script type="text/html" id="template_11_zasad">
+        <h1>Jedenaście Satanistycznych Zasad Dla Ziemi</h1>
+        <ol>
+            <li>Nie wyrażaj swoich opinii lub rad, jeżeli nie jesteś o to proszony.</li>
+            <li> Nie zwierzaj się ze swoich problemów innym, chyba ze jesteś pewien, ze chcą o nich słuchać.</li>
+            <li>Kiedy jesteś w cudzym domu (na cudzym terenie) okaż mu respekt lub jeżeli nie potrafisz nie chodź tam.
+            </li>
+            <li>Jeżeli gość w twoim domu (na twoim terenie) dręczy cię, traktuj go okrutnie i bez miłosierdzia.</li>
+            <li>Nie rob seksualnych "postępów" dopóki nie dostaniesz wyraźnej propozycji współżycia.</li>
+            <li>Nie bierz tego co nie należy do ciebie, chyba ze jest ta rzecz dla kogoś brzemieniem i osoba ta "płacze"
+                by być uwolniona.
+            </li>
+            <li>Potwierdź moc magii jeśli udało ci się przy jej pomocy zaspokoić swoje pragnienia. Jeżeli zaprzeczysz
+                mocy magii po jej wykorzystaniu, utracisz wszystko co w ten sposób uzyskałeś.
+            </li>
+            <li>Nie narzekaj na cos co nie dotyczy ciebie.</li>
+            <li>Nie krzywdź małych dzieci.</li>
+            <li>Nie zabijaj zwierząt (nie-ludzi), chyba ze zostaniesz zaatakowany lub będziesz potrzebował pożywienia.
+            </li>
+            <li>Kiedy chodzisz w "otwartym" terenie nie zaczepiaj nikogo. Jeżeli ktoś cię zaczepia, poproś go by
+                przestał. Jeżeli nie przestanie zniszcz go.
+            </li>
+        </ol>
+
+    </script>
+    <script type="text/html" id="template_9_twierdzen">
+        <h1>Dziewięć Satanistycznych Twierdzeń</h1>
+        <ol>
+            <li>Szatan reprezentuje zaspokojenie zamiast abstynencji.</li>
+            <li>Szatan reprezentuje witalna egzystencje zamiast duchowych złudzeń.</li>
+            <li>Szatan reprezentuje nieskazitelną mądrość zamiast hipokrytycznego samo-okłamywania.</li>
+            <li>Szatan reprezentuje szacunek dla tych którzy na niego zasłużyli zamiast miłości dla niewdzięczników.
+            </li>
+            <li>Szatan reprezentuje zemstę zamiast nadstawiania drugiego policzka.</li>
+            <li>Szatan reprezentuje odpowiedzialność za odpowiedzialnych zamiast troski ofiarowanej psychicznym
+                krwiopijcom.
+            </li>
+            <li>Szatan reprezentuje człowieka jako po prostu jeszcze jedno zwierze, czasem lepsze, częściej jednak
+                gorsze od tych, które chodzą na czworaka, ponieważ przez swą duchową boskość i rozwój intelektualny stał
+                się najgorszym ze wszystkich zwierząt.
+            </li>
+            <li>Szatan reprezentuje wszystkie tak-zwane grzechy które prowadzą do psychicznego, fizycznego i moralnego
+                zaspokojenia.
+            </li>
+            <li>Szatan zawsze był najlepszym przyjacielem kościoła, albowiem utrzymywał ten interes przez wszystkie te
+                lata.
+            </li>
+        </ol>
+    </script>
+    <script type="text/html" id="template_9_grzechow">
+        <h1>9 Satanistycznych Grzechów</h1>
+        <ol>
+            <li>Głupota - Główny grzech w satanizmie. Szkoda, że głupota nie jest bolesna. Niewiedza to jedna rzecz,
+                lecz społeczeństwo rozwija się w stronę głupoty. Ludzie robią wszystko, co im się powie. Media promują
+                głupotę jako postawę nie tylko akceptowalną, ale i chwalebną. Satanista musi nauczyć się widzieć te
+                sztuczki i nie może sobie pozwolić na bycie głupim.
+            </li>
+            <li>Pretensjonalność - Puste pozowanie jest irytujące i nie jest stosowaniem zasad Niższej Magii. Jest to
+                coś, co na równi z głupotą utrzymuje dziś obieg pieniądza. Każdy chce czuć się kimś ważnym, bez względu
+                na to, czy ma do tego podstawy, czy nie.
+            </li>
+            <li>Projekcja naszych reakcji i wrażliwości na kogoś kto prawdopodobnie nie jest z Tobą zharmonizowany -
+                Jest to błąd polegający na oczekiwaniu od ludzi takiej samej uwagi, uprzejmości i szacunku, jakie ty im
+                dajesz. Tak nie jest. Zamiast tego, sataniści powinni przestrzegać zasady "czyń drugiemu to, co on
+                tobie". Wymaga to wiecznej czujności i pracy nad sobą, bo inaczej ulegniesz wygodnemu złudzeniu, że
+                wszyscy są tacy jak ty. Jak powiedziano, pewne utopie byłyby idealne w narodzie składającym się z
+                filozofów, ale niestety (lub może na szczęście, z machiaveliańskiego punktu widzenia) jesteśmy jeszcze
+                daleko od tego.
+            </li>
+            <li>Samooszukiwanie się - Jest wymienione w "9 zasadach", lecz zasługuje, by być tu powtórzonym. Inny główny
+                grzech. Nie możemy czcić "świętych krów", które ludzie nam przedstawiają - w tym ról, jakie oczekują, że
+                będziemy grali. Jedynym tymczasowym oszustwem, jakie jest dopuszczalne, jest oszustwo dla zabawy i ze
+                świadomością tego, co się robi. Ale wtedy nie jest to oszukiwanie siebie!
+            </li>
+            <li>Konformizm w stadzie - To jest dla satanisty oczywiste. W porządku jest spełnianie życzeń innych osób,
+                jeżeli ostatecznie odnosisz z tego korzyść. Ale tylko głupcy idą za stadem, pozwalając bezosobowej
+                większości rządzić sobą. Należy mądrze wybrać mistrza zamiast stać się niewolnikiem kaprysów wielu
+                ludzi.
+            </li>
+            <li>Brak perspektywy - Nigdy nie trać z oczu tego, kim jesteś i jakie zagrożenie możesz stanowić samym swoim
+                istnieniem. Tworzymy historię właśnie teraz, każdego dnia. Zawsze myśl z ogólno-historycznej i
+                społecznej perspektywy - to ważny klucz do magii. Nie przejmuj się stadem - wiedz, że pracujesz na
+                zupełnie innym poziomie niż reszta świata.
+            </li>
+            <li>Niepamięć o przeszłości - Jest to jedna z technik prania mózgu stosowana przez ludzi, którzy chcą
+                wcisnąć nam coś niegdyś znanego jako nowe, w nowym opakowaniu. Oczekuje się od nas, że uznamy geniusz
+                wynalazcy i zapomnimy o oryginale. To czyni społeczeństwo łatwym do rządzenia.
+            </li>
+            <li>Urojona duma - Zwróć uwagę na to pierwsze słowo. Duma to wspaniała rzecz, dopóki nie wylewamy dziecka
+                razem z kąpielą. Zasadą dla satanisty jest: jeśli coś działa na twoją korzyść, to dobrze. Kiedy
+                przestaje pracować na twoją korzyść, kiedy sam zapędziłeś się w kozi róg i jedynym wyjściem jest
+                przyznać się do błędu, zrób to.
+            </li>
+            <li>Brak estetyki - Estetyka jest ważna w magii i powinna być kultywowana. Klasyczne standardy piękna i
+                formy są odrzucane przez konsumpcyjne społeczeństwo, lecz wrażliwość na piękno, dla równowagi, jest
+                ważnym narzędziem satanisty stosującego magię i powinno być używane dla zwiększenia jej efektywności.
+                Nie to, jest uważane za ładne, jest takie, lecz to, co takie jest. Estetyka jest sprawą osobistą,
+                odbiciem czyjejś natury, lecz są rzeczy, których harmonia i piękno jest uniwersalne i temu nie należy
+                zaprzeczać.
+            </li>
+        </ol>
+    </script>
+    <script type="text/html" id="template_potwor_spagetti">
+        <h1>Co to jest "Latający Potwór Spaghetti"? Skąd się wziął?</h1>
+        <p>Latający Potwór Spaghetti jako Stwórca Wszechświata istnieje od zawsze, jednakże Jego Kościół pozostawał
+            przez długi czas w ukryciu. Najwyraźniej obecnie Jego Makaronowatość stwierdził, że pastafarianizm jest
+            światu wybitnie potrzebny, dlatego w 2005 roku nasz Prorok Bobby Henderson, pisząc słynny List do Rady
+            Szkolnictwa w Kansas, ujawnił nasz Kościół. Od tego czasu, na całym świecie ludzie zaczęli masowo odkrywać,
+            że są pastafarianami. Napisana przez Bobbiego Ewangelia LPS oraz skomponowany przez wielu natchnionych
+            autorów Luźny Kanon stały się podstawą, na której zaczęły opierać się Kościoły w coraz to nowych krajach. W
+            Polsce Kościół LPS istnieje od maja 2011 roku.</p>
+        <h1>Czy istnieli wcześniej jacyś Prorocy pastafarianizmu? Dlaczego się nie objawili?</h1>
+        <p>Pastafarianizm był pierwszą religią. Można by rzec, że był religią pierwotną, po której dopiero powstały inne
+            kulty. Pewne źródła wskazują na to, że to Potwór stworzył inne religie. Dlaczego to zrobił pozostaje jednak
+            zagadką.</p>
+        <p>Pierwszą istotą stworzoną przez Potwora był Karzeł. Można go teraz spotkać w Pastafariańskim Niebie. Z
+            niektórych zapisków w Luźnym Kanonie wiemy, że istnieli ludzie, z którymi Potwór się komunikował, a nawet
+            prowadził z nimi regularne rozmowy. Jednakże, z racji tego że Kościół przez wieki był w ukryciu, niewiele
+            wiemy co działo się potem. Nie znamy też przyczyn wycofania się Potwora i Pierwszych Pastafarian. Ostatnim
+            Prorokiem Pastafarianizmu jest Bobby Henderson, który zapoczątkował nowe ujawnienie się Kościoła Latającego
+            Potwora Spaghetti.</p>
+        <h1>Dlaczego akurat Latający Potwór Spaghetti?</h1>
+        <p>Gdyż właśnie w takiej formie się nam objawił. Warto tutaj wspomnieć, że w przeciwieństwie do innych bóstw,
+            Latający Potwór Spaghetti ma wielkie poczucie humoru. Dlatego też Jego objawienie się w takiej formie może
+            być swoistym żartem. Możliwe, że w istocie tak nie wygląda, bądź nie ma On wyglądu w ogóle. Tak czy inaczej,
+            jako że On jest bogiem i jest doskonały, my nie możemy kwestionować Jego formy manifestacji. Niemniej idea
+            Makaronu, jaką niesie za sobą Latający Potwór Spaghetti, ma wiele głębszych znaczeń. Mógł chcieć, byśmy
+            zwrócili na nie uwagę. Na przykład DNA wygląda jak świderki, ludzki układ nerwowy wygląda jak Jego
+            Makaronowatość, a nitki spaghetti mogą odnosić się do teorii strun. Wiele zdjęć objawień, które nadsyłają
+            nasi współwyznawcy tylko potwierdza Jego obecność w otaczającym nas świecie.</p>
+        <h1>W co tak naprawdę wierzą pastafarianie?</h1>
+        <p>Wierzymy, że Latający Potwór Spaghetti stworzył nas jako istoty racjonalne i zachęca nas do kierowania się w
+            życiu właśnie zdrowym rozsądkiem. Dlatego też On sam nie mówi nam, co jest dobre, a co złe. Wie, że sami
+            możemy do tego dojść i dokonać słusznego wyboru. Racjonalne podejście do świata powoduje nawet, że
+            pastafarianin może, a nawet powinien powątpiewać w istnienie Potwora, tak jak we wszystkie nadnaturalne
+            byty. Jego Makaronowatość nie jest na tyle próżny, by wymagać od nas wiary w Niego. On cieszy się, gdy idąc
+            za Jego wskazówkami prowadzimy dobre i szczęśliwe życie.</p>
+        <p>Latający Potwór Spaghetti, w przeciwieństwie do wielu innych bóstw, jest miły i sympatyczny, nie czyni
+            złośliwości, nie wymaga — a wręcz nie chce, abyśmy się Jego bali. Nie mści się za wyrządzone zło, tylko
+            zachęca do naprawienia go. Nie dzieli i nie ocenia nas ze względu na rasę, płeć, wiek czy orientację
+            seksualną, w końcu to On nas takimi stworzył.</p>
+        <p>Pastafarianie wierzą, że ludzie są, tak jak Potwór, z natury dobrzy. Jako że On obdarzył nas wszystkich
+            wewnętrznym poczuciem moralności, nie potrzebujemy nakazów i zakazów. Przytoczyć można tutaj
+            arystotelesowską etykę cnót, która głosi że człowiek powinien żyć rozwijając swoje pozytywne cechy, a w swym
+            poczynaniu kierując się szczerą chęcią czynienia dobra, a nie przestrzegania narzuconych z góry zasad i
+            strachu przed karą za ich złamanie.</p>
+        <h1>Dlaczego pojawiają się wśród Was pewne powiązania z chrześcijaństwem (na przykład powiedzenie „O mój
+            Boże”).</h1>
+        <p>Jesteśmy przesiąknięci lokalną tradycją oraz wpajaną nam od małego religią i nie ma się co dziwić, że czasami
+            takie rzeczy mówimy. Potwór jest bogiem tak jak każdy inny bóg, więc powiedzenie „O mój Boże” zamiast „O mój
+            Potworze” jest jak najbardziej prawidłowe. A że inne religie przejęły sobie na własność słowo „Bóg” i
+            rozumieją przez to słowo tylko swojego boga, aby innych bogów przykryć, to już nie nasza wina.</p>
+    </script>
+    <script type="text/html" id="template_8_wolalbym">
+        <h1>Osiem "Naprawdę wolałbym byś nie..."</h1>
+        <p>Chociaż Jego Makaronowatość nie ustanowił żadnych przykazań, za których łamanie szłoby się do piekła czy
+            gdziekolwiek indziej gdzie nie można pić piwa, to dał nam osiem zwięzłych wskazówek, dotyczących rzeczy,
+            których wolałby abyśmy nie robili:</p>
+        <ol>
+            <li>Naprawdę wolałbym, byś nie zachowywał się jak jakiś świętoszkowaty dupek, gdy opisujesz moją
+                Makaronowatą Dobroć. Jeśli jacyś ludzie we mnie nie wierzą, to spoko. Naprawdę, nie jestem przecież
+                próżny. Nie o nich tu jednak chodzi więc nie zbaczajmy z tematu.
+            </li>
+            <li>Naprawdę wolałbym, byś nie wykorzystywał mojego istnienia do agresji, zniewalania, karania, patroszenia
+                i/lub sam wiesz, bycia niemiłym dla innych. Nie wymagam żadnych ofiar, a czystość jest ważna w przypadku
+                wody pitnej, a nie ludzi.
+            </li>
+            <li>Naprawdę wolałbym, byś nie oceniał ludzi ze względu na ich wygląd, sposób ubierania, mówienia czy też…
+                Wiesz co, bądź po prostu miły, OK? I wbij to sobie do głowy: kobieta = człowiek, mężczyzna = człowiek.
+                Jedno i to samo. Jedno nie jest lepsze od drugiego, no chyba że chodzi o wyczucie mody, gdyż, wybacz mi,
+                ale dałem to kobietom i niektórym facetom, którzy wiedzą, jaka jest różnica między kolorem morskim a
+                fuksją.
+            </li>
+            <li>Naprawdę wolałbym, byś nie oddawał się czynności, która jest niemoralna dla Ciebie lub Twojego partnera
+                - chętnego, zgadzającego się, dorosłego tak na ciele, jak i umyśle. Jeśli ktoś się z tym nie zgadza, to
+                niech spada, chyba że to też jest dla niego niemoralne, to niech dla odmiany wyłączy telewizor i pójdzie
+                na spacer.
+            </li>
+            <li>Naprawdę wolałbym, byś nie walczył z bigoteryjnymi, mizoginistycznymi, pełnymi nienawiści przekonaniami
+                innych o pustym żołądku. Zjedz coś i dopiero potem zajmij się tymi bredniami.
+            </li>
+            <li>Naprawdę wolałbym, byś nie budował kosztujących wiele milionów kościołów/meczetów/kapliczek dla mej
+                Makaronowatej Wspaniałości, gdy te pieniądze można o wiele lepiej wydać, sam wybierz: A. zlikwidować
+                ubóstwo, B. zwalczyć choroby, C. żyć w pokoju, namiętnie kochać, no i obniżyć koszty kablówki. Mogę być
+                Wszechwiedzącą Węglowodanową Istotą, jednak nie przeszkadza mi to w czerpaniu przyjemności z prostych
+                rzeczy. Wiem, co mówię – jestem przecież Stwórcą.
+            </li>
+            <li>Naprawdę wolałbym, byś nie rozpowiadał ludziom wkoło, że przemawiam do Ciebie. Nie jesteś aż tak
+                interesujący. Zrozum to. Mówiłem Ci przecież, byś kochał swych bliźnich, rozważ to.
+            </li>
+            <li>Naprawdę wolałbym, byś nie robił innym tego, czego byś nie chciał, by oni robili Tobie… No wiesz, chyba
+                że lubisz rzeczy związane z dużą ilością lateksu / skór / lubrykantów / Las Vegas, to tego też raczej
+                nie rób. Jeśli druga osoba też to lubi (pamiętaj jednak o punkcie czwartym), to działajcie, róbcie
+                zdjęcia, ale na miłość Makaronu, użyjcie PREZERWATYWY!!! Naprawdę, to tylko kawałek gumki, jeżeli nie
+                chciałbym, by TO było przyjemne, dodałbym Wam jakieś kolce albo coś.
+            </li>
+        </ol>
+    </script>
+</head>
+<body>
+<div id="layout">
+    <!-- Menu toggle -->
+    <a href="#menu" id="menuLink" class="menu-link">
+        <!-- Hamburger icon -->
+        <span></span>
+    </a>
+
+    <div id="menu">
+        <div class="pure-menu">
+            <a class="pure-menu-heading" href="#">Satanizm</a>
+            <ul class="pure-menu-list">
+                <li class="pure-menu-item"><a href="#/11_zasad" class="pure-menu-link">11 Zasad</a></li>
+                <li class="pure-menu-item"><a href="#/9_twierdzen" class="pure-menu-link">9 Twierdzeń</a></li>
+                <li class="pure-menu-item"><a href="#/9_grzechow" class="pure-menu-link">9 Grzechow</a></li>
+            </ul>
+            <a class="pure-menu-heading" href="#/potwor_spagetti">Latający Potwór Spaghetti</a>
+            <ul class="pure-menu-list">
+                <li class="pure-menu-item"><a href="#/8_wolalbym" class="pure-menu-link">Osiem "Naprawdę wolałbym byś
+                    nie..."</a></li>
+            </ul>
+        </div>
+    </div>
+
+    <div id="main">
+        <div class="header">
+            <h1>Strona szatana</h1>
+            <h2>Jeżeli jedna osoba ma jakieś urojenia, nazywamy to szaleństwem. Jeżeli wiele osób cierpi na to samo
+                urojenie, nazywamy to religią.</h2>
+        </div>
+
+        <div class="content">
+            <div id="view"></div>
+        </div>
+    </div>
+</div>
+<script>
+    (function (window, document) {
+
+        var layout   = document.getElementById('layout'),
+            menu     = document.getElementById('menu'),
+            menuLink = document.getElementById('menuLink'),
+            content  = document.getElementById('main');
+
+        function toggleClass(element, className) {
+            var classes = element.className.split(/\s+/),
+                length = classes.length,
+                i = 0;
+
+            for(; i < length; i++) {
+                if (classes[i] === className) {
+                    classes.splice(i, 1);
+                    break;
+                }
+            }
+            // The className is not found
+            if (length === classes.length) {
+                classes.push(className);
+            }
+
+            element.className = classes.join(' ');
+        }
+
+        function toggleAll(e) {
+            var active = 'active';
+
+            e.preventDefault();
+            toggleClass(layout, active);
+            toggleClass(menu, active);
+            toggleClass(menuLink, active);
+        }
+
+        menuLink.onclick = function (e) {
+            toggleAll(e);
+        };
+
+        content.onclick = function(e) {
+            if (menu.className.indexOf('active') !== -1) {
+                toggleAll(e);
+            }
+        };
+
+    }(this, this.document));
+
+    route('/', 'home', function () {
+    });
+    route('/11_zasad', 'template_11_zasad', function () {
+    });
+    route('/9_twierdzen', 'template_9_twierdzen', function () {
+    });
+    route('/9_grzechow', 'template_9_grzechow', function () {
+    });
+    route('/potwor_spagetti', 'template_potwor_spagetti', function () {
+    });
+    route('/8_wolalbym', 'template_8_wolalbym', function () {
+    });
+</script>
+</body>
+</html>
+
